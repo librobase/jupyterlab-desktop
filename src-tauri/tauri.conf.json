@@ -1,0 +1,132 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "http://localhost:5173",
+    "distDir": "../build"
+  },
+  "package": {
+    "productName": "jupyterlab-desktop",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "app": {},
+      "clipboard": {},
+      "dialog": {},
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
+        "scope": [
+          "$RESOURCE",
+          "$RESOURCE/*",
+          "$RESOURCE/*/**"
+        ]
+      },
+      "globalShortcut": {},
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["http://*", "https://*"]
+      },
+      "notification": {},
+      "os": {},
+      "path": {
+        "all": true
+      },
+      "process": {},
+      "shell": {
+        "execute": true,
+        "sidecar": true,
+        "open": "^*",
+        "scope": [
+          {
+            "name": "bin/micromamba",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "conda",
+            "cmd": "conda",
+            "args": true
+          },
+          {
+            "name": "python",
+            "cmd": "$RESOURCE/prefix/bin/python",
+            "args": true
+          }
+        ]
+      },
+      "window": {}
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [
+        "bin/micromamba"
+      ],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "librobase.jupyterlab-desktop",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [
+        "assets/*",
+        "workspace/*"
+      ],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null,
+      "dangerousUseHttpScheme": true,
+      "dangerousRemoteDomainIpcAccess": [
+        {
+          "domain": "localhost",
+          "windows": ["main"]
+        }
+      ]
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "JupyterLab Desktop",
+        "width": 800
+      }
+    ]
+  }
+}

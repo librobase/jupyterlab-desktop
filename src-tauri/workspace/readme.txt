@@ -1,0 +1,1 @@
+This folder is the workspace for jupyter servers.
