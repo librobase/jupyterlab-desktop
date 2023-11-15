@@ -39,7 +39,9 @@
         "scope": ["http://*", "https://*"]
       },
       "notification": {},
-      "os": {},
+      "os": {
+        "all": true
+      },
       "path": {
         "all": true
       },
