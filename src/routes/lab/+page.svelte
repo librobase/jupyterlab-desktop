@@ -4,6 +4,7 @@
 
   import sessionStorage from '$lib/use/sessionStorage'
 
+  // ---------------------------------------------------------------------------
   onMount(async () => {
     let port = sessionStorage.get('jupyterLab.port')
     let token = sessionStorage.get('jupyterLab.token')

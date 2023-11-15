@@ -116,115 +116,25 @@
       }
     })
   }
-
-
-
-  async function runJupyterServer() {
-    stdout = ''
-    stderr = ''
-    let output = await python.runJupyterServer({
-      onStdout: msg => {
-        stdout += msg
-      },
-      onStderr: msg => {
-        stderr += msg
-      },
-      onError: msg => {
-        errmsg += msg
-      }
-    })
-  }
-
-
-  
-
-
-  async function openPrefix() {
-    stdout = ''
-    stderr = ''
-    let output = await directory.openPrefix()
-  }
-
-
-  async function openWorkspace() {
-    stdout = ''
-    stderr = ''
-    let output = await directory.openWorkspace()
-  }
-
-
-  async function openAssets() {
-    stdout = ''
-    stderr = ''
-    let output = await directory.openAssets()
-  }
-
-  
-
-
-  async function connectjupyterServer() {
-    await jupyter.connectJupyterServer()
-  }
-
-  async function connectjupyterLab() {
-    await jupyter.connectJupyterLab()
-  }
-
-
-  async function runPyCode() {
-    let output = await jupyter.execute({
-      session: 'test',
-      code: 'print("hellooooooo")',
-      onStream: msg => {
-        console.log(msg)
-        //pystdout += msg
-      }
-    })
-  }
 </script>
 
 <!--/////////////////////////////////////////////////////////////////////////-->
 
 <VPane>
 
-  <!--svelte:fragment slot="top">
+  <svelte:fragment slot="top">
     <SPane class="p-3 bg-gray-100">
-      <button on:click={createEnvironment}>
-        Create Conda Environment
-        {#if $micromamba.busy}
-          <div class="spinner" />
-        {/if}
-      </button>
-      <button on:click={updateEnvironment}>
-        Update Conda Environment
-        {#if $micromamba.busy}
-          <div class="spinner" />
-        {/if}
-      </button>
-      <button on:click={installRequirements}>
-        Install Requirements
-        {#if $python.busy}
-          <div class="spinner" />
-        {/if}
-      </button>
-      <button on:click={runJupyterLab}>
-        Run JupyterLab
-        {#if $python.busy}
-          <div class="spinner" />
-        {/if}
-      </button>
-      <a href="/lab">Open JupyterLab</a>
-    </SPane>
-  </svelte:fragment>
-
-  <hr-->
-
-  <svelte:fragment slot="center">
-    <SPane class="p-3">
       <div class="p-3 flex flex-row justify-start content-center">
         <div class="spinner mr-3" />
         <span>{status}</span>
       </div>
+    </SPane>
+  </svelte:fragment>
+
+  <hr>
+
+  <svelte:fragment slot="center">
+    <SPane class="p-3">
       <pre class="text-gray-500">{stdout}</pre>
       <hr>
       <pre class="text-red-500">{stderr}</pre>
