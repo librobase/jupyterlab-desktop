@@ -122,6 +122,7 @@
     "windows": [
       {
         "fullscreen": false,
+        "fileDropEnabled": false,
         "height": 600,
         "resizable": true,
         "title": "JupyterLab Desktop",
