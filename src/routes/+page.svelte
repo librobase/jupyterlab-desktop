@@ -32,7 +32,6 @@
       await installRequirements()
       status = 'Running Jupyter Lab'
       await runJupyterLab()
-      goto('/lab')
     }
     else {
       console.log('prefix does not exist')
@@ -42,7 +41,6 @@
       await installRequirements()
       status = 'Running Jupyter Lab'
       await runJupyterLab()
-      goto('/lab')
     }
   })
   
