@@ -7,8 +7,6 @@ https://tauri.app/v1/guides/getting-started/prerequisites
 Then:
 ```bash
 npm install
-npm run tauri dev
-npm run tauri build
 ```
 
 ## Run in Dev Mode
