@@ -60,8 +60,13 @@
             "args": true
           },
           {
-            "name": "python",
+            "name": "python-macos",
             "cmd": "$RESOURCE/prefix/bin/python",
+            "args": true
+          },
+          {
+            "name": "python-win",
+            "cmd": "$RESOURCE/prefix/python",
             "args": true
           }
         ]
