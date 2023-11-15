@@ -2,7 +2,7 @@
 
 ## Attention
 This repo contains a proof-of-concept JupyterLab Desktop app. The app has been
-tested ONLY on a MacOS with M2 processor. 
+tested ONLY on a MacOS with M2 processor. Known issues exist for Windows.
 
 ## Install
 Make sure you have the Tauri pre-requisits:
