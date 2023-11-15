@@ -1,5 +1,9 @@
 <script>
   import { onMount } from 'svelte'
+  import { goto } from '$app/navigation'
+
+  import fs from '$lib/use/fs'
+
   import micromamba from '$lib/stores/micromamba'
   import python from '$lib/stores/python'
   import directory from '$lib/stores/directory'
@@ -8,15 +12,38 @@
   import VPane from '$lib/components/VPane.svelte'
   import SPane from '$lib/components/SPane.svelte'
 
-
-
+  // ---------------------------------------------------------------------------
   let stdout = ''
   let stderr = ''
   let errmsg = ''
+  let status = ''
 
   // ---------------------------------------------------------------------------
   onMount(async () => {
-    
+    await directory.reload()
+
+    let prefixExists = await fs.exists($directory.prefix)
+
+    if (prefixExists) {
+      console.log('prefix exists')
+      status = 'Checking Conda Environment'
+      await updateEnvironment()
+      status = 'Checking Requirements'
+      await installRequirements()
+      status = 'Running Jupyter Lab'
+      await runJupyterLab()
+      goto('/lab')
+    }
+    else {
+      console.log('prefix does not exist')
+      status = 'Creating Conda Environment'
+      await createEnvironment()
+      status = 'Installing Requirements'
+      await installRequirements()
+      status = 'Running Jupyter Lab'
+      await runJupyterLab()
+      goto('/lab')
+    }
   })
   
   // ---------------------------------------------------------------------------
@@ -80,6 +107,9 @@
       },
       onStderr: msg => {
         stderr += msg
+        if (stderr.includes('http://localhost')) {
+          goto('/lab')
+        }
       },
       onError: msg => {
         errmsg += msg
@@ -157,7 +187,7 @@
 
 <VPane>
 
-  <svelte:fragment slot="top">
+  <!--svelte:fragment slot="top">
     <SPane class="p-3 bg-gray-100">
       <button on:click={createEnvironment}>
         Create Conda Environment
@@ -187,10 +217,14 @@
     </SPane>
   </svelte:fragment>
 
-  <hr>
+  <hr-->
 
   <svelte:fragment slot="center">
     <SPane class="p-3">
+      <div class="p-3 flex flex-row justify-start content-center">
+        <div class="spinner mr-3" />
+        <span>{status}</span>
+      </div>
       <pre class="text-gray-500">{stdout}</pre>
       <hr>
       <pre class="text-red-500">{stderr}</pre>
